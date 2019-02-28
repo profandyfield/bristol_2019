@@ -1,0 +1,26 @@
+---
+title: ""
+author: ""
+date: "`r Sys.Date()`"
+bibliography: "references.bib"
+output:
+  html_document:
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What does trait anxiety and the transition from primary to secondary education mean for maths achievement and maths anxiety?
+
+Professor Andy Field
+
+*School of Psychology, University of Sussex, UK*
+
+## Abstract
+
+Despite the UK being one of the highest spenders on education, the maths performance of UK students is far below countries that spend much less per child. The problems stemming from poor maths achievement in school leads well into adult life. It is estimated that 49% of working-age adults have the maths skills expected of primary-school children, with only around 22% of working-age adults, having the equivalent of a C-grade or above in GCSE maths (National Numeracy, 2012). One explanation of poor adult competency in maths could be difficulties across the transition from primary to secondary education. This transition is (potentially) one of the most stressful events in a young person's life [@evansReviewAcademicPsychological2018]. Given that anxiety predicts poorer academic achievement [@pine_childhood_1997] and theories of anxiety assume that anxiety hinders cognitive performance [@eysenck_anxiety_2007; @owens_processing_2008] it seems reasonable that the primary- to secondary- education transition has the potential to negatively affect the trajectory of a child's attainment in mathematics. This talk describes two secondary analyses of existing longitudinal datasets. The first uses the Avon Longitudinal Study of Parents and Children (ALSPAC) birth cohort [@fraser_cohort_2013] to answer the question of whether working memory capacity moderates the effects of trait anxiety on trajectories of maths achievement across the transition from primary to secondary education. The second uses the Twins Early Development Study, TEDS [@haworth_twins_2013], cohort to quantify the extent to which the trajectory of maths attainment across the primary to secondary education transition predicts later maths anxiety (age 17). Classical and Bayesian latent growth models were fit to address both questions. The results suggest that after adjusting for IQ and demographic variables working memory and anxiety had tiny effects on the trajectory of maths attainment. Pre-transition anxiety had a small effect on later maths anxiety but this effect was moderated by the rate of change in maths attainment across the transition from primary- to -secondary education.
+
+
+## References
