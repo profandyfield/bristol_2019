@@ -9,7 +9,6 @@ output:
     css: ["default", "robot-fonts", "my_styles.css"]
     nature:
       beforeInit: 'macros.js'
-      ratio: '16.9'
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -155,7 +154,7 @@ class: center
 
 --
 
-![:scale 65%](images/evans_et_al_fig_1.png)
+![](images/evans_et_al_fig_1.png)
 
 
 ???
@@ -363,7 +362,7 @@ n_half_preds <- maths_wide %>% nrow()
 ---
 class: center
 --
-![:scale 70%](images/alspac_statistical_model.png)
+![](images/alspac_statistical_model.png)
 
 ???
 
@@ -1021,162 +1020,6 @@ class: inverse
 ![](./images/blogger.png) www.miltonthecat.rocks
 
 ![](./images/youtube.png) www.youtube.com/profandyfield
-
----
-
-## Reducing anxiety
-
---
-
-- 38% of Psychology undergraduates struggle with statistics (Field, 2014)
-
---
-
-- Maths anxiety is a barrier to learning maths and related subjects (Carey et al., 2016) but little is known about how to reduce it. 
-
---
-
-- Children engage in story-based learning from a very early age, using metaphor to infer knowledge and description to create mental imagery (Egan & Gillian 2016).
-
---
-
-- There is a dearth of tightly controlled experimental studies to demonstrate the efficacy of narrative-based teaching.
-
---
-
-- Can embedding statistical teaching within a fictional narrative help to reduce anxiety and increase comprehension?
-
---
-
-- This pilot study looked at the feasibility and plausible effects of using a fictional narrative to teach 11 statistical concepts.
-
----
-## Methods
-
---
-
-- Thirty-five (13 males, 22 females) participants aged 19-63 years (*M* = 31.35, *SD* = 13.86) were allocated randomly to statistical materials presented in: a standard textbook, Socratic dialogue or fictional narrative format.
-
---
-
-- All materials were adapted from a textbook that uses a fictional narrative (Field 2016).
-
---
-
-- Participants were pre-tested for their knowledge of 11 statistical concepts, their maths anxiety, and state anxiety.
-
---
-
-- 22 multiple choice questions (2 per concept) were used to assess their understanding of the statistical concepts.
-
---
-
-- We took Likert-scale measures of how complicated, engaging, enjoyable, funny, and relevant the teaching materials were as well as their ability to visualise them.
-
----
-class: center, middle
-
-## Engagement
-
-```{r}
-engage <- fiction_tib %>% 
-  dplyr::select(id, condition, engaging, funny, complicated, relevant, enjoyable, visualise) %>% 
-  gather(key = measure, value = rating, -c(id, condition)) %>% 
-  mutate(
-   measure = str_to_title(measure)
-  )
-
-engage_plot <- ggplot(engage, aes(condition, rating, colour = measure)) 
-engage_plot +
-  geom_point(size = 1, alpha = 0.7, position = position_jitterdodge(dodge.width = 0.5)) + 
-  stat_summary(fun.data = "mean_cl_boot", position = position_dodge(width = 0.5)) +
-  facet_wrap(~ measure) +
-  scale_y_continuous(breaks= 0:5) + 
-  coord_cartesian(ylim = c(0, 5)) +
-  labs(x = "Reading material", y = "Rating (out of 5)") + 
-  andy.dsus() +
-  theme(legend.position = "none", text = element_text(size = 10), axis.text.x = element_text(angle = 45))
-```
-
----
-class: center, middle
-
-## Statistical comprehension
-
-```{r}
-
-mcq_plot <- ggplot(fiction_tib, aes(condition, mcq, colour = condition))
-mcq_plot + 
-  geom_point(size = 1, alpha = 0.7, position = position_jitter(width = 0.1)) +
-  stat_summary(fun.data = "mean_cl_boot") +
-  scale_y_continuous(breaks = seq(0, 20, 2)) +
-  coord_cartesian(ylim = c(0, 20)) +
-  labs(x = "Reading material", y = "MCQ Score (out of 20)") +
-  andy.dsus() +
-  theme(legend.position = "none", text = element_text(size = 10))
-```
-
----
-class: middle, center
-
-## Bayesian prior
-
-```{r}
-
-#create dummies
-
-fiction_tib <- fiction_tib %>% 
-  mutate(
-    nar_vs_text = ifelse(condition == "Narrative", 1, 0),
-    soc_vs_text = ifelse(condition == "Socratic", 1, 0)
-  )
-
-#visualise priors
-
-prior_mean = 1
-prior_sd = 2
-
-ggplot(data.frame(x = c(-10, 10)), aes(x)) +
-  stat_function(fun = dnorm, n = 1e3, args = list(mean = prior_mean, sd = prior_sd), color = cbRed, size = 1) +
-  scale_x_continuous(breaks = -10:10) +
-  geom_vline(xintercept = prior_mean, colour = cbOrange) +
-  theme_bw()
-
-```
-
----
-## Bayesian estimates
-
---
-
-- A Bayesian linear model predicting the multiple choice scores (0-22) from the reading conditions (dummy coded as narrative vs. textbook, Socratic vs textbook) was fit
-
---
-
-- A broad Guassian prior was used representing a mean difference centred on 1, with plausible mean differences ranging between extremes of -5 to 7 (approx.)
-
---
-
-- The 95% HPDI intervals indicated that the plausible effect of using fictional narratives compared to standard textbook presentation ranged from *b* = 0.28 to 4.85 (*M* = 2.43)
-
---
-
-- In contrast, the plausible effect of using Socratic materials compared to standard textbook presentation ranged from *b* = -1.28 to 3.11 (*M* = 0.81)
-
-
----
-class: inverse
-
-# Join my cult
-
-![](./images/twitter.png) @profandyfield
-
-![](./images/blogger.png) www.discoveringstatistics.com
-
-![](./images/blogger.png) www.miltonthecat.rocks
-
-![](./images/youtube.png) www.youtube.com/profandyfield
-
 
 
 ```{r, eval=FALSE}
